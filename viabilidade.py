@@ -11,14 +11,14 @@ with st.sidebar:
         'número de alunos em janeiro',
         min_value=0,
         max_value=100,
-        value=15,
+        value=30,
     )
 
-    mensalidade_media_janeiro = st.number_input(
+    mensalidade_media_alunos_antigos = st.number_input(
         'mensalidade média em janeiro',
-        min_value=1445.,
-        max_value=1600.,
-        value=1585.63,
+        min_value=1000.,
+        max_value=2250.,
+        value=1702,
     )
 
     taxa_de_aumento_ate_agosto = st.number_input(
@@ -32,14 +32,14 @@ with st.sidebar:
         'aumento mensal de alunos depois de agosto',
         min_value=0,
         max_value=100,
-        value=4,
+        value=1,
     )
 
     mensalidade_media_alunos_novos = st.number_input(
         'mensalidade média dos alunos novos',
-        min_value=1400.,
-        max_value=2200.,
-        value=1774.22,
+        min_value=1000.,
+        max_value=2500.,
+        value=1928,
     )
 
 
@@ -54,17 +54,17 @@ def func_despesas(n_alunos):
     salarios = pd.DataFrame(
         data=[
             # ['gestor', True, 5000, 30, 30, 1],
-            ['diretor', True, 1700, 30, 30, 1],
-            ['coordenador', True, 1600, 30, 30, 1],
-            ['necessidades_especiais', True, 1556.57, 44, 44, 1],
-            ['auxiliar_de_creche', False, 1342.06, 44, 30, n_auxiliares],
-            ['professor', True, 1556.57, 20, 20, 6],
-            ['professor_ed_fisica', True, 4*24.64, 1, 6, 1],
-            ['professor_extra', True, 4*24.64, 1, 3, 5],
-            ['cozinheiro', True, 1342.06, 44, 44, 1],
-            ['auxiliar_de_servicos_gerais', True, 1320, 44, 44, 1],
-            ['auxiliar_administrativo', True, 1454.90, 44, 44, 1],
-            ['porteiro', True, 1320, 44, 44, 1],
+            ['diretor', True, 1780, 30, 30, 1],
+            ['coordenador', True, 1675, 30, 30, 1],
+            ['professor_necessidades_especiais', True, 1630, 44, 44, 1],
+            ['auxiliar', False, 1405, 44, 30, n_auxiliares],
+            ['professor', True, 1630, 20, 20, 6],
+            ['professor_ed_fisica', True, 1032, 1, 6, 1],
+            ['professor_atividades_extras', True, 1032, 1, 3, 5],
+            ['cozinheiro', True, 1405, 44, 44, 1],
+            ['auxiliar_de_servicos_gerais', True, 1479, 44, 44, 1],
+            ['auxiliar_administrativo', True, 1524, 44, 44, 1],
+            ['porteiro', True, 1479, 44, 44, 1],
         ],
         columns=['cargo', 'fixo', 'piso', 'horas_piso', 'horas_desejadas', 'n_funcionarios']
     )
@@ -76,13 +76,13 @@ def func_despesas(n_alunos):
     despesas = pd.DataFrame(
         data=[
             ['encargos_variaveis', 'var', salarios[~salarios['fixo']]['encargo'].sum()],
-            ['mercado', 'var', 150*n_alunos],
+            ['mercado', 'var', 157*n_alunos],
             ['encargos_fixos', 'fixo', salarios[salarios['fixo']]['encargo'].sum()],
-            ['aluguel', 'fixo', 14000],
-            ['luz', 'fixo', 1500],
-            ['agua', 'fixo', 1500],
-            ['internet', 'fixo', 200],
-            ['imposto', 'fixo', 4000]
+            ['aluguel', 'fixo', 14661],
+            ['luz', 'fixo', 1571],
+            ['agua', 'fixo', 1571],
+            ['internet', 'fixo', 209],
+            ['imposto', 'fixo', 4189]
         ],
         columns=['despesa', 'tipo', 'valor']
     )
@@ -96,11 +96,11 @@ n_auxiliares_janeiro = ceil(n_alunos_janeiro / 6)
 salarios_janeiro = pd.DataFrame(
     data=[
         # ['gestor', True, 5000, 30, 30, 1],
-        ['diretor', True, 1700, 30, 30, 1],
-        ['auxiliar_de_creche', False, 1342.06, 44, 30, n_auxiliares_janeiro],
-        ['cozinheiro', True, 1342.06, 44, 44, 1],
-        ['auxiliar_de_servicos_gerais', True, 1320, 44, 44, 1],
-        ['auxiliar_administrativo', True, 1454.90, 44, 44, 1],
+        ['diretor', True, 1780, 30, 30, 1],
+        ['auxiliar', False, 1405, 44, 30, n_auxiliares_janeiro],
+        ['cozinheiro', True, 1405, 44, 44, 1],
+        ['auxiliar_de_servicos_gerais', True, 1479, 44, 44, 1],
+        ['auxiliar_administrativo', True, 1524, 44, 44, 1],
     ],
     columns=['cargo', 'fixo', 'piso', 'horas_piso', 'horas_desejadas', 'n_funcionarios']
 )
@@ -111,19 +111,19 @@ salarios_janeiro['encargo'] = 1.4 * salarios_janeiro['salario_total']
 
 despesas_janeiro = pd.DataFrame(
     data=[
-        ['mercado', 'var', 150*n_alunos_janeiro],
-        ['aluguel', 'fixo', 14000],
-        ['luz', 'fixo', 1500],
-        ['agua', 'fixo', 1500],
-        ['internet', 'fixo', 200],
-        ['imposto', 'fixo', 4000]
+        ['mercado', 'var', 157*n_alunos_janeiro],
+        ['aluguel', 'fixo', 14661],
+        ['luz', 'fixo', 1571],
+        ['agua', 'fixo', 1571],
+        ['internet', 'fixo', 209],
+        ['imposto', 'fixo', 4189]
     ],
     columns=['despesa', 'tipo', 'valor']
 )
 
 receitas_janeiro = pd.DataFrame(
     [
-        ['mensalidades', n_alunos_janeiro * mensalidade_media_janeiro]
+        ['mensalidades', n_alunos_janeiro * mensalidade_media_alunos_antigos]
     ],
     columns=['receita', 'valor']
 )
@@ -152,7 +152,7 @@ for mes in range(1, 13):
             n_alunos[-1] + taxa_de_aumento_depois_agosto
         )
     
-mensalidades = [n_alunos_janeiro * mensalidade_media_janeiro]
+mensalidades = [n_alunos_janeiro * mensalidade_media_alunos_antigos]
 for mes in range(1, 12):
     mensalidades.append(
         mensalidades[-1] + (n_alunos[mes] - n_alunos[mes-1])* mensalidade_media_alunos_novos 
