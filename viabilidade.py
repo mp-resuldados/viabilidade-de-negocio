@@ -16,8 +16,8 @@ with st.sidebar:
 
     mensalidade_media_alunos_antigos = st.number_input(
         'mensalidade média em janeiro',
-        min_value=1000.,
-        max_value=2250.,
+        min_value=1000,
+        max_value=2250,
         value=1702,
     )
 
@@ -37,8 +37,8 @@ with st.sidebar:
 
     mensalidade_media_alunos_novos = st.number_input(
         'mensalidade média dos alunos novos',
-        min_value=1000.,
-        max_value=2500.,
+        min_value=1000,
+        max_value=2500,
         value=1928,
     )
 
