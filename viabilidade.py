@@ -46,38 +46,37 @@ def func_despesas(n_alunos):
 
     salarios = pd.DataFrame(
         data=[
-            # ['gestor', True, 5000, 30, 30, 1],
-            ['diretor', True, 1780, 30, 30, 1],
-            ['coordenador', True, 1675, 30, 30, 1],
-            ['professor_necessidades_especiais', True, 1630, 44, 44, 1],
-            ['auxiliar', False, 1405, 44, 30, n_auxiliares],
-            ['professor', True, 1630, 20, 20, 6],
-            ['professor_ed_fisica', True, 103, 1, 6, 1],
-            ['professor_atividades_extras', True, 103, 1, 3, 5],
-            ['cozinheiro', True, 1405, 44, 44, 1],
-            ['auxiliar_de_servicos_gerais', True, 1479, 44, 44, 1],
-            ['auxiliar_administrativo', True, 1524, 44, 44, 1],
-            ['porteiro', True, 1479, 44, 44, 1],
+            # ['gestor', 5000, 30, 30, 1],
+            ['diretor', 1780, 30, 30, 1],
+            ['coordenador', 1675, 30, 30, 1],
+            ['professor_necessidades_especiais', 1630, 44, 44, 1],
+            ['auxiliar', 1405, 44, 30, n_auxiliares],
+            ['professor', 1630, 20, 20, 6],
+            ['professor_ed_fisica', 103, 1, 6, 1],
+            ['professor_atividades_extras', 103, 1, 3, 5],
+            ['cozinheiro', 1405, 44, 44, 1],
+            ['auxiliar_de_servicos_gerais', 1479, 44, 44, 1],
+            ['auxiliar_administrativo', 1524, 44, 44, 1],
+            ['porteiro', 1479, 44, 44, 1],
         ],
-        columns=['cargo', 'fixo', 'piso', 'horas_piso', 'horas_desejadas', 'n_funcionarios']
+        columns=['cargo', 'piso', 'horas_piso', 'horas_desejadas', 'n_funcionarios']
     )
 
     salarios['salario'] = salarios['piso'] / salarios['horas_piso'] * salarios['horas_desejadas']
     salarios['salario_total'] = salarios['salario'] * salarios['n_funcionarios']
-    salarios['encargo'] = 1.4 * salarios['salario_total']
+    salarios['custo_do_funcionario'] = 1.4 * salarios['salario_total']
 
     despesas = pd.DataFrame(
         data=[
-            ['encargos_variaveis', 'var', salarios[~salarios['fixo']]['encargo'].sum()],
-            ['mercado', 'var', 157*n_alunos],
-            ['encargos_fixos', 'fixo', salarios[salarios['fixo']]['encargo'].sum()],
-            ['aluguel', 'fixo', 14661],
-            ['luz', 'fixo', 1571],
-            ['agua', 'fixo', 1571],
-            ['internet', 'fixo', 209],
-            ['imposto', 'fixo', 4189]
+            ['folha_de_pagamento', salarios['custo_do_funcionario'].sum()],
+            ['alimentacao', 157*n_alunos],
+            ['aluguel', 14661],
+            ['luz', 1571],
+            ['agua', 1571],
+            ['internet', 209],
+            ['imposto', 4189]
         ],
-        columns=['despesa', 'tipo', 'valor']
+        columns=['despesa', 'valor']
     )
 
     return despesas['valor'].sum()
@@ -107,12 +106,6 @@ mes_a_mes['n_alunos'] = n_alunos
 mes_a_mes['mensalidades'] = mes_a_mes['n_alunos']*mensalidade_media
 
 
-
-
-
-
-
-
 despesas_ate_agosto = mes_a_mes.iloc[:8].apply(
     lambda row: func_despesas(row['n_alunos'] ),
     axis=1,
@@ -131,9 +124,9 @@ mes_a_mes['acumulado'] = mes_a_mes['lucro'].cumsum()
 # Visualização da tabela.
 
 fundo_do_poco = mes_a_mes['acumulado'].idxmin()
-fundo_do_poco
+
 recuperacao = mes_a_mes[mes_a_mes['acumulado'].ge(0)]['acumulado'].idxmin()
-recuperacao
+
 def highlight_rows(row):
     if row.name == recuperacao:
         return ['background-color: lightgreen']*6
