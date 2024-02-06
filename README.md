@@ -1,9 +1,5 @@
 # Cálculos para a viabilidade de uma escola
 
-em construção...
-
------------------
-
 ## Introdução
 
 Uma escola de período integral recém comprada e com dívidas solicitou uma avaliação das finanças para guiar uma tomada de decisão: fechar, vender ou investir.
@@ -21,13 +17,13 @@ Com os dados pesquisados, montamos uma tabela para os salários contendo:
 - o piso salarial de cada cargo;
 - o número de horas a que se refere o piso;
 - o número de horas do contrato profissional;
-- número de funcionarios no cargo.
+- número de funcionários no cargo.
 
 Para a escola em questão, um aumento de alunos requer a contratação de mais auxiliares. Com base na lei e na distribuição de alunos da escola, utilizamos uma expressão para calcular o número de auxiliares necessários em função do número de alunos.
 
 Utilizamos as informações da tabela para calcular os salários e o custo do funcionário para empresa (salários mais encargos).
 
-Para a tabela de despesas, utlilizamos os dados de:
+Para a tabela de despesas, utilizamos os dados de:
 - folha de pagamento (calculado a partir da tabela de salários);
 - aluguel;
 - luz;
@@ -60,8 +56,11 @@ As cores vermelho e verde que realçam a tabela se referem respectivamente a:
 
 ## Conclusão
 
- continua...
+A aplicação pode ser utilizada para obter informações sobre o aporte financeiro necessário durante os meses em que a escola não tem alunos em quantidade suficiente para suprir as despesas (linha em vermelho). Também podemos ter a informação de quanto tempo leva para ter o retorno do aporte feito (linha em verde).
 
+Em caso de um investidor se interessar pela escola, podemos apresentar os dados de maneira simples e com a facilidade de ajustar os parâmetros e ter resultados em tempo real. A aplicação pode dar uma estimativa do lucro da escola e ajudar a direcionar os investimentos, como investir em propaganda para atrair novos alunos ou investir em novos serviços para aumentar o potencial de arrecadação. Para um possível comprador, a aplicação possibilita uma tomada de decisão baseadas em dados. 
+
+O cálculo da viabilidade de um negócio é de extrema importância tanto para quem deseja abrir um novo negócio como para quem está comprando um negócio consolidado. Ser capaz de prever lucros e prejuízos pode ser o grande diferencial entre um empresário bem sucedido ou um empreendimento falido.
 
 -----------------------------------------------------------------------------
 MP-resuldados

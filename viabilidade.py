@@ -1,11 +1,13 @@
+# APLICAÇÃO SIMULANDO A VIABILIDADE FINANCEIRA DE UMA ESCOLA
+
 from math import ceil
 
 import pandas as pd
 import streamlit as st
 
-
 ########################################################################################
-# Parâmetros livres.
+# Parâmetros livres
+
 with st.sidebar:
     n_0 = st.number_input(
         'número inicial de alunos',
@@ -37,13 +39,12 @@ with st.sidebar:
 
 
 ########################################################################################
-# Funções.
+# Funções
 
 def func_despesas(n_alunos):
 
     n_auxiliares = 0.1* n_alunos
     
-
     salarios = pd.DataFrame(
         data=[
             # ['gestor', 5000, 30, 30, 1],
@@ -82,7 +83,7 @@ def func_despesas(n_alunos):
     return despesas['valor'].sum()
 
 #####################################################################################
-
+# Cálculo de receitas e despesas mensais em função do número de alunos
 
 mes_a_mes = pd.DataFrame(
     [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ,12],
@@ -121,7 +122,7 @@ mes_a_mes['lucro'] = mes_a_mes['mensalidades'] - mes_a_mes['despesas']
 mes_a_mes['acumulado'] = mes_a_mes['lucro'].cumsum()
 
 ########################################################################################
-# Visualização da tabela.
+# Visualização da tabela
 
 fundo_do_poco = mes_a_mes['acumulado'].idxmin()
 
