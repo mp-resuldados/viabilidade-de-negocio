@@ -43,11 +43,11 @@ with st.sidebar:
 
 def func_despesas(n_alunos):
 
-    n_auxiliares = 0.1* n_alunos
+    n_auxiliares = 0.1* n_alunos # em média, um auxiliar de creche para 10 alunos
     
     salarios = pd.DataFrame(
         data=[
-            # ['gestor', 5000, 30, 30, 1],
+            # ['gestor', 5000, 30, 30, 1], # pró-labore não computado
             ['diretor', 1780, 30, 30, 1],
             ['coordenador', 1675, 30, 30, 1],
             ['professor_necessidades_especiais', 1630, 44, 44, 1],
@@ -65,7 +65,7 @@ def func_despesas(n_alunos):
 
     salarios['salario'] = salarios['piso'] / salarios['horas_piso'] * salarios['horas_desejadas']
     salarios['salario_total'] = salarios['salario'] * salarios['n_funcionarios']
-    salarios['custo_do_funcionario'] = 1.4 * salarios['salario_total']
+    salarios['custo_do_funcionario'] = 1.4 * salarios['salario_total'] # salários e encargos
 
     despesas = pd.DataFrame(
         data=[
